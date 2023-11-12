@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8B71129B2B015A4F00680DC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B71129A2B015A4F00680DC4 /* main.cpp */; };
+		8B7112A32B015B0A00680DC4 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B7112A12B015B0A00680DC4 /* game.cpp */; };
+		8BE771312B015DB30090172D /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7712F2B015DB30090172D /* world.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		8B7112972B015A4F00680DC4 /* dungeon-delver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "dungeon-delver"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B71129A2B015A4F00680DC4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8B7112A12B015B0A00680DC4 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		8B7112A22B015B0A00680DC4 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
+		8BE7712F2B015DB30090172D /* world.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
+		8BE771302B015DB30090172D /* world.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				8B71129A2B015A4F00680DC4 /* main.cpp */,
+				8B7112A12B015B0A00680DC4 /* game.cpp */,
+				8BE7712F2B015DB30090172D /* world.cpp */,
+				8BE771302B015DB30090172D /* world.hpp */,
+				8B7112A22B015B0A00680DC4 /* game.hpp */,
 			);
 			path = "dungeon-delver";
 			sourceTree = "<group>";
@@ -120,6 +130,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B71129B2B015A4F00680DC4 /* main.cpp in Sources */,
+				8BE771312B015DB30090172D /* world.cpp in Sources */,
+				8B7112A32B015B0A00680DC4 /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

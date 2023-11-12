@@ -1,14 +1,13 @@
-//
-//  main.cpp
-//  dungeon-delver
-//
-//  Created by Przemek Rogowski on 12/11/23.
-//
-
 #include <iostream>
+#include "game.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    std::cout << "Hello, Dungeon Delver!" << std::endl;
+    
+    Game game;
+    game.Init();
+    game.Start();
+    game.Clean();
+    
     return 0;
 }
