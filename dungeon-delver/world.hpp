@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <iostream>
 
 using std::string;
 using std::vector;
@@ -30,8 +31,9 @@ public:
     World() = default;
     ~World();
     void Load(string name);
-    void display();
+    void Display();
 private:
+    string locationName;
     vector<vector<Location>> locations;
     Position curLocation;
 };

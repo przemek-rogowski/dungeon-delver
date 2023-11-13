@@ -12,10 +12,12 @@ Terrain city{"city", 'C'};
 char playerChar = 'x';
 
 World::~World() {
+    std::cout << "Destroying world object" << std::endl;
 }
 
 void World::Load(string name) {
-    locations = {
+    this->locationName = name;
+    this->locations = vector<vector<Location>>{
         {
             Location{"plain1", plain, false},
             Location{"plain2", plain, false},
@@ -53,7 +55,8 @@ void World::Load(string name) {
     curLocation = {2, 2};
 }
 
-void World::display() {
+void World::Display() {
+    std::cout << std::endl << "Location: " << this->locationName << std::endl << std::endl;
     for (int i = 0; i < locations.size(); i++) {
         for (int j = 0; j < locations[i].size(); j++) {
             if (curLocation.x == i && curLocation.y == j) {

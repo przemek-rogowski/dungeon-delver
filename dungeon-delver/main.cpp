@@ -2,7 +2,7 @@
 #include "game.hpp"
 
 int main(int argc, const char * argv[]) {
-    std::cout << "Hello, Dungeon Delver!" << std::endl;
+    std::cout << "Starting game..." << std::endl;
     
     Game game;
     game.Init();

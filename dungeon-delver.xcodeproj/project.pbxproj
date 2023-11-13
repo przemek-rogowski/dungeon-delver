@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B27CECB2B020E6F008B5D8C /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B27CEC92B020E6F008B5D8C /* menu.cpp */; };
 		8B71129B2B015A4F00680DC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B71129A2B015A4F00680DC4 /* main.cpp */; };
 		8B7112A32B015B0A00680DC4 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B7112A12B015B0A00680DC4 /* game.cpp */; };
 		8BE771312B015DB30090172D /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7712F2B015DB30090172D /* world.cpp */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B27CEC92B020E6F008B5D8C /* menu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = menu.cpp; sourceTree = "<group>"; };
+		8B27CECA2B020E6F008B5D8C /* menu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = menu.hpp; sourceTree = "<group>"; };
 		8B7112972B015A4F00680DC4 /* dungeon-delver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "dungeon-delver"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B71129A2B015A4F00680DC4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8B7112A12B015B0A00680DC4 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 			children = (
 				8B71129A2B015A4F00680DC4 /* main.cpp */,
 				8B7112A12B015B0A00680DC4 /* game.cpp */,
+				8B27CEC92B020E6F008B5D8C /* menu.cpp */,
+				8B27CECA2B020E6F008B5D8C /* menu.hpp */,
 				8BE7712F2B015DB30090172D /* world.cpp */,
 				8BE771302B015DB30090172D /* world.hpp */,
 				8B7112A22B015B0A00680DC4 /* game.hpp */,
@@ -131,6 +136,7 @@
 			files = (
 				8B71129B2B015A4F00680DC4 /* main.cpp in Sources */,
 				8BE771312B015DB30090172D /* world.cpp in Sources */,
+				8B27CECB2B020E6F008B5D8C /* menu.cpp in Sources */,
 				8B7112A32B015B0A00680DC4 /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
