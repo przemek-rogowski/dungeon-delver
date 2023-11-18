@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <limits>
+//#include "entity/character.hpp"
 
 std::string readCommand() {
     std::cout << "\nEnter a command: ";
@@ -16,7 +17,30 @@ std::unique_ptr<MainMenu> Game::GetGameMenu() {
     menu->AddCommand(Command{
         "character",
         "See character details.",
-        [this]() { std::cout << "Show character sheet" << std::endl;}
+        [this]() {
+            std::cout << "Character sheet" << std::endl;
+            std::cout << "****************" << std::endl;
+            std::cout << "Name: " << this->character->GetName() << std::endl;
+            std::cout << this->character->GetStats().ToString() << std::endl;
+            std::cout << "****************" << std::endl;
+        }
+    });
+    menu->AddCommand(Command{
+        "gear",
+        "See character gear.",
+        [this]() {
+            std::cout << "Your equipment:" << std::endl;
+            for (auto item : this->character->GetGear()) {
+                std::cout << "  " << item->name << std::endl;
+            }
+        }
+    });
+    menu->AddCommand(Command{
+        "map",
+        "Display map of the kingdom.",
+        [this]() {
+            this->world->Display();
+        }
     });
     menu->AddCommand(Command{
         "explore",
@@ -24,9 +48,9 @@ std::unique_ptr<MainMenu> Game::GetGameMenu() {
         [this]() { std::cout << "Exploring..." << std::endl;}
     });
     menu->AddCommand(Command{
-        "gear",
-        "See character gear.",
-        [this]() { std::cout << "Your equipment..." << std::endl;}
+        "travel",
+        "Travel to a new location.",
+        [this]() { std::cout << "Traveling..." << std::endl;}
     });
     menu->AddCommand(Command{
         "leave",
@@ -35,6 +59,7 @@ std::unique_ptr<MainMenu> Game::GetGameMenu() {
             std::cout << "Saving the game..." << std::endl;
             this->gameState = GameState::Menu;
             this->gameMenu = nullptr;
+            this->character = nullptr;
         }
     });
     return menu;
@@ -64,8 +89,10 @@ void Game::Init() {
     /*
      Game ->
         character
-        explore
         gear
+        explore
+        map
+        travel
         exit [save & quit]
      
      Exploration
@@ -88,6 +115,9 @@ void Game::Init() {
             std::cout << "Starting a new game." << std::endl;
             this->gameState = GameState::Game;
             this->gameMenu = GetGameMenu();
+            this->character = std::make_shared<Character>();
+            this->character->AddGear(new GearItem{"Sword"});
+            this->character->AddGear(new GearItem{"Dagger"});
         }
     });
     this->mainMenu->AddCommand(Command{
@@ -115,9 +145,9 @@ void Game::Clean() {
 }
 
 void Game::Start() {
-    system("clear");
     
     while (this->isRunning) {
+        system("clear");
         this->DisplayInfo();
         switch (this->gameState) {
             case GameState::Menu:
@@ -141,7 +171,6 @@ void Game::Start() {
     
         std::cout << std::endl << "Press Enter to continue...";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        system("clear");
     }
 }
 

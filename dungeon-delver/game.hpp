@@ -6,6 +6,7 @@
 #include <map>
 #include "menu.hpp"
 #include <memory>
+#include "entity/character.hpp"
 
 enum class GameState {
     Menu,
@@ -33,11 +34,15 @@ public:
 private:
     void DisplayInfo();
     std::unique_ptr<MainMenu> GetGameMenu();
-    bool isRunning = true;
-    GameState gameState = GameState::Menu;
-    std::unique_ptr<World> world;
     std::unique_ptr<MainMenu> mainMenu;
     std::unique_ptr<MainMenu> gameMenu;
+    
+    bool isRunning = true;
+    
+    GameState gameState = GameState::Menu;
+    
+    std::unique_ptr<World> world;
+    std::shared_ptr<Character> character;
 };
 
 #endif /* game_hpp */

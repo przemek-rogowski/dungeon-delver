@@ -10,6 +10,9 @@
 		8B27CECB2B020E6F008B5D8C /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B27CEC92B020E6F008B5D8C /* menu.cpp */; };
 		8B71129B2B015A4F00680DC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B71129A2B015A4F00680DC4 /* main.cpp */; };
 		8B7112A32B015B0A00680DC4 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B7112A12B015B0A00680DC4 /* game.cpp */; };
+		8BBE4BF62B0829DE008649BA /* character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE4BF42B0829DD008649BA /* character.cpp */; };
+		8BBE4BFA2B083126008649BA /* gear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE4BF82B083125008649BA /* gear.cpp */; };
+		8BC1F18E2B09205000F1409F /* character_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BC1F18C2B09205000F1409F /* character_utils.cpp */; };
 		8BE771312B015DB30090172D /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7712F2B015DB30090172D /* world.cpp */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +35,12 @@
 		8B71129A2B015A4F00680DC4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8B7112A12B015B0A00680DC4 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		8B7112A22B015B0A00680DC4 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
+		8BBE4BF42B0829DD008649BA /* character.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character.cpp; sourceTree = "<group>"; };
+		8BBE4BF52B0829DD008649BA /* character.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character.hpp; sourceTree = "<group>"; };
+		8BBE4BF82B083125008649BA /* gear.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gear.cpp; sourceTree = "<group>"; };
+		8BBE4BF92B083125008649BA /* gear.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gear.hpp; sourceTree = "<group>"; };
+		8BC1F18C2B09205000F1409F /* character_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_utils.cpp; sourceTree = "<group>"; };
+		8BC1F18D2B09205000F1409F /* character_utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_utils.hpp; sourceTree = "<group>"; };
 		8BE7712F2B015DB30090172D /* world.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
 		8BE771302B015DB30090172D /* world.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,8 +82,22 @@
 				8BE7712F2B015DB30090172D /* world.cpp */,
 				8BE771302B015DB30090172D /* world.hpp */,
 				8B7112A22B015B0A00680DC4 /* game.hpp */,
+				8BBE4BF72B082A1A008649BA /* entity */,
 			);
 			path = "dungeon-delver";
+			sourceTree = "<group>";
+		};
+		8BBE4BF72B082A1A008649BA /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				8BBE4BF42B0829DD008649BA /* character.cpp */,
+				8BBE4BF52B0829DD008649BA /* character.hpp */,
+				8BBE4BF82B083125008649BA /* gear.cpp */,
+				8BBE4BF92B083125008649BA /* gear.hpp */,
+				8BC1F18C2B09205000F1409F /* character_utils.cpp */,
+				8BC1F18D2B09205000F1409F /* character_utils.hpp */,
+			);
+			path = entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +157,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBE4BF62B0829DE008649BA /* character.cpp in Sources */,
 				8B71129B2B015A4F00680DC4 /* main.cpp in Sources */,
+				8BBE4BFA2B083126008649BA /* gear.cpp in Sources */,
+				8BC1F18E2B09205000F1409F /* character_utils.cpp in Sources */,
 				8BE771312B015DB30090172D /* world.cpp in Sources */,
 				8B27CECB2B020E6F008B5D8C /* menu.cpp in Sources */,
 				8B7112A32B015B0A00680DC4 /* game.cpp in Sources */,
