@@ -33,16 +33,22 @@ public:
     
 private:
     void DisplayInfo();
-    std::unique_ptr<MainMenu> GetGameMenu();
+    MainMenu* InitMainMenu();
+    MainMenu* InitGameMenu();
+    MainMenu* InitExplorationMenu();
+    MainMenu* InitCombatMenu();
+    
     std::unique_ptr<MainMenu> mainMenu;
     std::unique_ptr<MainMenu> gameMenu;
+    std::unique_ptr<MainMenu> explorationMenu;
+    std::unique_ptr<MainMenu> combatMenu;
     
     bool isRunning = true;
     
     GameState gameState = GameState::Menu;
     
     std::unique_ptr<World> world;
-    std::shared_ptr<Character> character;
+    std::unique_ptr<Character> character;
 };
 
 #endif /* game_hpp */

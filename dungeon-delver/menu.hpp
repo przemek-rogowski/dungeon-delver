@@ -13,7 +13,7 @@ struct Command {
 
 class MainMenu {
 public:
-    MainMenu() = default;
+    MainMenu(){};
     ~MainMenu();
     void Display();
     void AddCommand(Command command);

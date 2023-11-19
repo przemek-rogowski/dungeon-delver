@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include <limits>
-//#include "entity/character.hpp"
 
 std::string readCommand() {
     std::cout << "\nEnter a command: ";
@@ -12,17 +11,13 @@ std::string readCommand() {
     return command;
 }
 
-std::unique_ptr<MainMenu> Game::GetGameMenu() {
-    std::unique_ptr<MainMenu> menu = std::make_unique<MainMenu>();
+MainMenu* Game::InitGameMenu() {
+    MainMenu* menu = new MainMenu();
     menu->AddCommand(Command{
         "character",
         "See character details.",
         [this]() {
-            std::cout << "Character sheet" << std::endl;
-            std::cout << "****************" << std::endl;
-            std::cout << "Name: " << this->character->GetName() << std::endl;
-            std::cout << this->character->GetStats().ToString() << std::endl;
-            std::cout << "****************" << std::endl;
+            this->character->Display();
         }
     });
     menu->AddCommand(Command{
@@ -65,6 +60,86 @@ std::unique_ptr<MainMenu> Game::GetGameMenu() {
     return menu;
 }
 
+MainMenu* Game::InitMainMenu() {
+    MainMenu* menu = new MainMenu();
+    menu->AddCommand(Command{
+        "new game",
+        "Start a new game.",
+        [this]() {
+            std::cout << "Starting a new game." << std::endl;
+            this->gameState = GameState::Game;
+            this->character = std::unique_ptr<Character>(Character::Generate());
+            this->gameMenu = std::unique_ptr<MainMenu>(InitGameMenu());
+            
+            this->character->AddGear(new GearItem{"Sword"});
+            this->character->AddGear(new GearItem{"Leather Armor"});
+        }
+    });
+    menu->AddCommand(Command{
+        "load game",
+        "Continue your previous game.",
+        [this]() { std::cout << "Loading a game" << std::endl;}
+    });
+    menu->AddCommand(Command{
+        "help",
+        "Display this help message.",
+        [this]() { this->mainMenu->Display(); }
+    });
+    menu->AddCommand(Command{
+        "exit",
+        "Moving to another location.",
+        [this]() {
+            std::cout << "Goodbye! Thanks for playing." << std::endl;
+            this->isRunning = false;
+        }
+    });
+    return menu;
+}
+
+MainMenu* Game::InitExplorationMenu() {
+    MainMenu* menu = new MainMenu();
+    // TODO display description
+    menu->AddCommand(Command{
+        "enter",
+        "Enter the location.",
+        [this]() { std::cout << "It's dark..." << std::endl;}
+    });
+    menu->AddCommand(Command{
+        "fight",
+        "Fight the monster.",
+        [this]() {
+            std::cout << "It's time for a fight." << std::endl;
+            //this->combatMenu = std::unique_ptr<MainMenu>(InitCombatMenu());
+        }
+    });
+    menu->AddCommand(Command{
+        "leave",
+        "Leave the location.",
+        [this]() { std::cout << "Leaving the location." << std::endl;}
+    });
+    return menu;
+}
+
+MainMenu* Game::InitCombatMenu() {
+    MainMenu* menu = new MainMenu();
+    menu->AddCommand(Command{
+        "attack",
+        "Perform offensive attack.",
+        [this]() { std::cout << "You have hit." << std::endl;}
+    });
+    menu->AddCommand(Command{
+        "defend",
+        "Perform defensive attack.",
+        [this]() { std::cout << "You have hit." << std::endl;}
+    });
+    menu->AddCommand(Command{
+        "run",
+        "Run away from the fight.",
+        [this]() { std::cout << "You have run away." << std::endl;}
+    });
+    return menu;
+}
+
 Game::~Game() {
     std::cout << "Destroying game object" << std::endl;
 }
@@ -84,61 +159,11 @@ void Game::DisplayInfo() {
 
 void Game::Init() {
     this->world = std::make_unique<World>();
-    this->mainMenu = std::make_unique<MainMenu>();
-    
-    /*
-     Game ->
-        character
-        gear
-        explore
-        map
-        travel
-        exit [save & quit]
-     
-     Exploration
-        - list of the places to visit
-        - go back
-     
-     Combat
-        - attack
-        - defend
-        - run away
-     
-     */
+    this->mainMenu = std::unique_ptr<MainMenu>(InitMainMenu());
+    this->explorationMenu = std::unique_ptr<MainMenu>(InitExplorationMenu());
+    this->combatMenu = std::unique_ptr<MainMenu>(InitCombatMenu());
     
     this->world->Load("Kingdom of Velanor");
-    
-    this->mainMenu->AddCommand(Command{
-        "new game",
-        "Start a new game.",
-        [this]() {
-            std::cout << "Starting a new game." << std::endl;
-            this->gameState = GameState::Game;
-            this->gameMenu = GetGameMenu();
-            this->character = std::make_shared<Character>();
-            this->character->AddGear(new GearItem{"Sword"});
-            this->character->AddGear(new GearItem{"Dagger"});
-        }
-    });
-    this->mainMenu->AddCommand(Command{
-        "load game",
-        "Continue your previous game.",
-        [this]() { std::cout << "Loading a game" << std::endl;}
-    });
-    this->mainMenu->AddCommand(Command{
-        "help",
-        "Display this help message.",
-        [this]() { this->mainMenu->Display(); }
-    });
-    this->mainMenu->AddCommand(Command{
-        "exit",
-        "Moving to another location.",
-        [this]() {
-            std::cout << "Goodbye! Thanks for playing." << std::endl;
-            this->isRunning = false;
-        }
-    });
-
 }
 
 void Game::Clean() {
