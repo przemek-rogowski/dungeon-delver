@@ -1,0 +1,5 @@
+plain::high plain::high plain::high plain::high
+plain::medium forest::medium forest::medium plain::medium
+forest::low city::low city::low forest::low
+forest::medium mountains::medium mountains::medium forest::medium
+forest::high mountains::high mountains::high forest::high

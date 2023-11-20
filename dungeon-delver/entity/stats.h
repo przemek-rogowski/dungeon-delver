@@ -14,7 +14,7 @@ struct Stats {
         std::cout << "Destroying Stats" << std::endl;
     }
     
-    std::string ToString() {
+    std::string ToString() const {
         return "Strength: " + std::to_string(strength) + "\n"
                        "Agility: " + std::to_string(agility) + "\n"
                        "Wits: " + std::to_string(wits) + "\n"

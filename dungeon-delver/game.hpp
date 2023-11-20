@@ -2,7 +2,7 @@
 #define game_hpp
 
 #include <stdio.h>
-#include "world.hpp"
+#include "world/world.hpp"
 #include <map>
 #include "menu.hpp"
 #include <memory>
@@ -13,7 +13,8 @@ enum class GameState {
     Game,
     Exploration,
     Combat,
-    Equipment
+    Equipment,
+    Travel
     /*
      when you open the game -> Menu
      when you load or start a game -> Game
@@ -37,11 +38,13 @@ private:
     MainMenu* InitGameMenu();
     MainMenu* InitExplorationMenu();
     MainMenu* InitCombatMenu();
+    MainMenu* InitTravelMenu();
     
     std::unique_ptr<MainMenu> mainMenu;
     std::unique_ptr<MainMenu> gameMenu;
     std::unique_ptr<MainMenu> explorationMenu;
     std::unique_ptr<MainMenu> combatMenu;
+    std::unique_ptr<MainMenu> travelMenu;
     
     bool isRunning = true;
     

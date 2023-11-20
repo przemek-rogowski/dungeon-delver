@@ -1,6 +1,7 @@
 
 #include "character.hpp"
 #include <iostream>
+#include "../item/item_repository.hpp"
 
 Character::Character() {}
 
@@ -8,7 +9,7 @@ Character::~Character() {
     std::cout << "Destroying character: " << this->name << std::endl;
 }
 
-const Stats* Character::GetStats() {
+Stats* Character::GetStats() {
     return this->stats.get();
 }
 
@@ -16,12 +17,12 @@ std::string Character::GetName() {
     return this->name;
 }
 
-std::vector<std::shared_ptr<GearItem>> Character::GetGear() {
-    return this->gear;
+std::shared_ptr<Weapon> Character::GetWeapon() {
+    return this->weapon;
 }
 
-void Character::AddGear(GearItem* gearItem) {
-    this->gear.push_back(std::make_shared<GearItem>(*gearItem));
+std::shared_ptr<Armor> Character::GetArmor() {
+    return this->armor;
 }
 
 void Character::Display() {
@@ -37,5 +38,7 @@ Character* Character::Generate() {
     std::cout << "Generating a character" << std::endl;
     character->name = CharacterUtils::GenerateName();
     character->stats = std::unique_ptr<Stats>(CharacterUtils::GenerateStats());
+    character->weapon = ItemRepository::Instance().GetWeapon(Item::Sword);
+    character->armor = ItemRepository::Instance().GetArmor(Item::Leather);
     return character;
 }

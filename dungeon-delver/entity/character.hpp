@@ -5,28 +5,33 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "gear.hpp"
 #include "character_utils.hpp"
 #include "stats.h"
 #include <iostream>
+
+#include "../item/weapon.hpp"
+#include "../item/armor.hpp"
 
 class Character {
 public:
     Character();
     ~Character();
     
-    const Stats* GetStats();
+    Stats* GetStats();
     std::string GetName();
-    std::vector<std::shared_ptr<GearItem>> GetGear();
+    std::shared_ptr<Weapon> GetWeapon();
+    std::shared_ptr<Armor> GetArmor();
+    
     void Display();
-    void AddGear(GearItem* gear);
     
     static Character* Generate();
     
 private:
     std::string name;
     std::unique_ptr<Stats> stats;
-    std::vector<std::shared_ptr<GearItem>> gear;
+    std::shared_ptr<Weapon> weapon;
+    std::shared_ptr<Armor> armor;
+    
 };
 
 #endif /* character_hpp */

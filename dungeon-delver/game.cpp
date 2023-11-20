@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <limits>
+#include "item/item_repository.hpp"
 
 std::string readCommand() {
     std::cout << "\nEnter a command: ";
@@ -25,8 +26,18 @@ MainMenu* Game::InitGameMenu() {
         "See character gear.",
         [this]() {
             std::cout << "Your equipment:" << std::endl;
-            for (auto item : this->character->GetGear()) {
-                std::cout << "  " << item->name << std::endl;
+            auto weapon = character->GetWeapon();
+            if (weapon) {
+                std::cout << "  " << weapon->name << " - damage +" << weapon->damage << std::endl;
+            } else {
+                std::cout << "  no weapon" << std::endl;
+            }
+            
+            auto armor = character->GetArmor();
+            if (armor) {
+                std::cout << "  " << armor->name << " - resistance +" << armor->resistance << std::endl;
+            } else {
+                std::cout << "  no armor" << std::endl;
             }
         }
     });
@@ -45,7 +56,10 @@ MainMenu* Game::InitGameMenu() {
     menu->AddCommand(Command{
         "travel",
         "Travel to a new location.",
-        [this]() { std::cout << "Traveling..." << std::endl;}
+        [this]() {
+            std::cout << "Traveling..." << std::endl;
+            this->gameState = GameState::Travel;
+        }
     });
     menu->AddCommand(Command{
         "leave",
@@ -70,9 +84,6 @@ MainMenu* Game::InitMainMenu() {
             this->gameState = GameState::Game;
             this->character = std::unique_ptr<Character>(Character::Generate());
             this->gameMenu = std::unique_ptr<MainMenu>(InitGameMenu());
-            
-            this->character->AddGear(new GearItem{"Sword"});
-            this->character->AddGear(new GearItem{"Leather Armor"});
         }
     });
     menu->AddCommand(Command{
@@ -140,6 +151,56 @@ MainMenu* Game::InitCombatMenu() {
     return menu;
 }
 
+MainMenu* Game::InitTravelMenu() {
+    MainMenu* menu = new MainMenu();
+    
+    menu->AddCommand(Command{
+        "north",
+        "Go north - Desert",
+        [this]() {
+            std::cout << "You are going north" << std::endl;
+            this->world->Move(Travel::North);
+            this->gameState = GameState::Game;
+        }
+    });
+    menu->AddCommand(Command{
+        "east",
+        "Go east - Forest",
+        [this]() {
+            std::cout << "You are going east" << std::endl;
+            this->world->Move(Travel::East);
+            this->gameState = GameState::Game;
+        }
+    });
+    menu->AddCommand(Command{
+        "south",
+        "Go south - Plains",
+        [this]() {
+            std::cout << "You are going south" << std::endl;
+            this->world->Move(Travel::South);
+            this->gameState = GameState::Game;
+        }
+    });
+    menu->AddCommand(Command{
+        "west",
+        "Go north - City",
+        [this]() {
+            std::cout << "You are going west" << std::endl;
+            this->world->Move(Travel::West);
+            this->gameState = GameState::Game;
+        }
+    });
+    menu->AddCommand(Command{
+        "back",
+        "Cancel the journey.",
+        [this]() {
+            std::cout << "You have canceled the journey." << std::endl;
+            this->gameState = GameState::Game;
+        }
+    });
+    return menu;
+}
+
 Game::~Game() {
     std::cout << "Destroying game object" << std::endl;
 }
@@ -158,12 +219,15 @@ void Game::DisplayInfo() {
 }
 
 void Game::Init() {
+    ItemRepository::Init();
+    
     this->world = std::make_unique<World>();
     this->mainMenu = std::unique_ptr<MainMenu>(InitMainMenu());
     this->explorationMenu = std::unique_ptr<MainMenu>(InitExplorationMenu());
     this->combatMenu = std::unique_ptr<MainMenu>(InitCombatMenu());
+    this->travelMenu = std::unique_ptr<MainMenu>(InitTravelMenu());
     
-    this->world->Load("Kingdom of Velanor");
+    this->world->Load("../assets.world_map.txt");
 }
 
 void Game::Clean() {
@@ -186,6 +250,10 @@ void Game::Start() {
             case GameState::Exploration:
                 break;
             case GameState::Combat:
+                break;
+            case GameState::Travel:
+                this->travelMenu->Display();
+                this->travelMenu->Process(readCommand());
                 break;
                 
             default:
